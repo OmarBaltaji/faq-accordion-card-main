@@ -47,6 +47,7 @@ main {
     background-repeat: no-repeat;
     background-size: 14rem; // Almost as the size of the main image
     background-position: top center;
+    transition: padding .8s ease;
 
     .main-pic {
 
@@ -59,6 +60,10 @@ main {
         }
     }
 
+    .box-pic {
+        display: none;
+    }
+
     h1 {
         font-weight: 700;
         margin-bottom: .5em;
@@ -67,43 +72,54 @@ main {
 
     .faq {
         padding: 10em 2em 2em; // The padding-top is large to give space between the faq div and main image
+        max-width: 17rem;
     }
 
     details {
         border-bottom: 1px solid $dividers-clr;
-        padding-bottom: 1em;
-        margin-bottom: 1.5em;
+        margin-bottom: 1.25em;
         width: 100%;
+        max-height: 2rem;
+        transition: all .8s ease;
 
-        &[open]{
+        &[open] {
+            max-height: 6rem;
+       
             summary {
                 font-weight: 700;
-                outline: none; // Remove default outline
+            }
+
+            p {
+                animation: fade .8s ease;
+            }
+
+            @keyframes fade {
+                from {opacity: 0;}
+                to {opacity: 1;}
             }
         }
 
         &:not([open]) {
-            summary {
-                outline: none; // Remove default outline
-            }
+            max-height: 3rem;
         }
+    }
 
-        summary, summary::-webkit-details-marker {
-            cursor: pointer;
-            list-style: none;
-            background: url(../images/icon-arrow-down.svg) right no-repeat; // Place custom marker
-            padding-inline-end: 2em;
-            padding-bottom: .5em;
+    summary, summary::-webkit-details-marker {
+        cursor: pointer;
+        list-style: none;
+        background: url(../images/icon-arrow-down.svg) right no-repeat; // Place custom marker
+        padding-inline-end: 2em;
+        padding-bottom: .5em;
+        margin-bottom: 1em;
 
-            &:hover {
-                color: $primary-soft-text;
-            }
+        &:hover {
+            color: $primary-soft-text;
         }
+    }
 
-        p {
-            padding-top: .5em;
-            padding-bottom: .5em;
-        }
+    p {
+        padding-top: .5em;
+        padding-bottom: 1em;
     }
 }
 
@@ -137,6 +153,7 @@ main {
         .faq {
             padding-top: 2em;
             padding-inline: 7em;
+            max-width: 28rem !important;
 
             h1 {
                 padding-bottom: 1rem;
@@ -156,9 +173,10 @@ main {
     }
 
     .box-pic {
-        top: 60%; // To position it correctly relative to the main image (shadow box in the main image)
+        display: block !important;
+        top: 50%; // To position it correctly relative to the main image (shadow box in the main image)
         position: absolute;
-        transform: translate(-44%, -50%);
+        transform: translate(-44%, -18%);
         left: 0; // To place it to the farthest left of the card
         
         img {
