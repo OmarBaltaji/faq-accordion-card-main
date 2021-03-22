@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Primary
+$primary-dark-text: hsl(238, 29%, 16%);
+$primary-soft-text: hsl(14, 88%, 65%); 
+$gradient-bg-violet: hsl(273, 75%, 66%);
+$gradient-bg-blue: hsl(240, 73%, 65%);
+
+// Neutral
+$neutral-very-dark-text:hsl(237, 12%, 33%);
+$neutral-grayish-text: hsl(240, 6%, 50%);
+$dividers-clr: hsl(240, 5%, 91%);
+
+body {
+    font-size: .75rem;
+    background-image: linear-gradient(to bottom, $gradient-bg-violet, $gradient-bg-blue);
+    font-family: 'Kumbh Sans', sans-serif;
+}
+
+main {
+    min-width: 100vw; // Full width of the screen
+    min-height: 100vh; // Full height of the screen
+    overflow: hidden; // No scrollbar in both the X and Y directions
+    display: flex;
+    flex-direction: column; // To display card and attribution on top of each other
+    justify-content: center; 
+    align-items: center; // To center the elements in the middle of the page
+    padding-top: 8rem; // To give room to the main image to be positioned in the middle border of the top of the card
+}
+
+.card {
+    background-color: #FFF;
+    margin-bottom: 1em; // Space between card and attribution
+    border-radius: 17px;
+    display: flex;
+    max-width: 40rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    background-image: url(../images/bg-pattern-mobile.svg);
+    background-repeat: no-repeat;
+    background-size: 14rem; // Almost as the size of the main image
+    background-position: top center;
+
+    .main-pic {
+
+        img {
+            max-width: 15rem; // Almost 85% of the actual image size 
+            position: absolute;
+            top: -8em;
+            left: 50%;
+            transform: translateX(-55%); // The extra 5% because the image has extra white space to the left
+        }
+    }
+
+    h1 {
+        font-weight: 700;
+        margin-bottom: .5em;
+        text-align: center; // On mobile device the FAQ title should be in the middle of the card
+    }
+
+    .faq {
+        padding: 10em 2em 2em; // The padding-top is large to give space between the faq div and main image
+    }
+
+    details {
+        border-bottom: 1px solid $dividers-clr;
+        padding-bottom: 1em;
+        margin-bottom: 1.5em;
+        width: 100%;
+
+        &[open]{
+            summary {
+                font-weight: 700;
+                outline: none; // Remove default outline
+            }
+        }
+
+        &:not([open]) {
+            summary {
+                outline: none; // Remove default outline
+            }
+        }
+
+        summary, summary::-webkit-details-marker {
+            cursor: pointer;
+            list-style: none;
+            background: url(../images/icon-arrow-down.svg) right no-repeat; // Place custom marker
+            padding-inline-end: 2em;
+            padding-bottom: .5em;
+
+            &:hover {
+                color: $primary-soft-text;
+            }
+        }
+
+        p {
+            padding-top: .5em;
+            padding-bottom: .5em;
+        }
+    }
+}
+
+@media (min-width: 47em) {
+    main {
+        padding: 0;
+    }
+
+    .faq {
+
+        h1 {
+            text-align: left; // faq title is aligned to the left on big screens
+        }
+    }
+       
+    .card {
+        min-width: 60%;
+        position: relative; // Reference for absolute images in children
+        align-items: center; // Center main image vertically
+        margin-bottom: 2em; // Space between card and attribution
+        padding-block: 3em;
+        padding-inline: 0 !important; // To overwrite the same property declared for smaller screens
+        background-image: url(../images/bg-pattern-desktop.svg);
+        background-size: 78%;
+        background-position: -185% 70%;
+
+        picture, .faq {
+            flex: 1; // Both elements take equal space
+        }
+
+        .faq {
+            padding-top: 2em;
+            padding-inline: 7em;
+
+            h1 {
+                padding-bottom: 1rem;
+            }
+        }
+    }
+
+    .main-pic {
+        overflow: hidden; // To crop the main image
+
+        img {
+        width: 110%;
+        max-width: 400px !important; // Overwrite the same property declared for smaller screens
+        transform: translate(-5em) !important; // Overwrite the same property declared for smaller screens
+        position: static !important; // Overwrite the same property declared for smaller screens
+        }
+    }
+
+    .box-pic {
+        top: 60%; // To position it correctly relative to the main image (shadow box in the main image)
+        position: absolute;
+        transform: translate(-44%, -50%);
+        left: 0; // To place it to the farthest left of the card
+        
+        img {
+            max-width: 70%;
+        }
+    }
+}
