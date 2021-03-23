@@ -104,7 +104,7 @@ main {
         }
     }
 
-    summary, summary::-webkit-details-marker {
+    summary, summary::marker {
         cursor: pointer;
         list-style: none;
         background: url(../images/icon-arrow-down.svg) right no-repeat; // Place custom marker
